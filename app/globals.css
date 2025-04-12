@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lcars-bg: #000000;
+  --lcars-elbow: #ff9900;
+  --lcars-text: #ffeecc;
+  --lcars-accent1: #ffcc66;
+  --lcars-accent2: #99ccff;
+  --lcars-accent3: #cc99ff;
+  --lcars-frame: #ff9900;
+  --lcars-button-bg: var(--lcars-accent2);
+  --lcars-button-text: var(--lcars-bg);
+  --lcars-button-hover-bg: var(--lcars-accent1);
+  --lcars-selected-bg: var(--lcars-accent3);
+  --lcars-selected-text: #ffffff;
+  --lcars-disabled-bg: #555;
+  --lcars-disabled-text: #999;
+  --placeholder-bg: #111;
+  --stat-bar-bg: #333;
+  --stat-bar-fill: var(--lcars-accent2);
+  --favorite-color: #ffdf00;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-lcars-text;
+  }
+}
+
+@layer components {
+  /* LCARS Loading Animation */
+  .lcars-loading {
+    @apply flex gap-2 items-center;
+  }
+
+  .lcars-loading-bar {
+    @apply w-16 h-4 bg-lcars-accent2 opacity-70;
+    animation: lcars-loading 1.5s infinite ease-in-out;
+  }
+
+  .lcars-loading-bar:nth-child(2) {
+    animation-delay: 0.5s;
+    @apply bg-lcars-accent1;
+  }
+
+  .lcars-loading-bar:nth-child(3) {
+    animation-delay: 1s;
+    @apply bg-lcars-accent3;
+  }
+
+  @keyframes lcars-loading {
+    0%,
+    100% {
+      transform: scaleY(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scaleY(1.5);
+      opacity: 1;
+    }
+  }
+
+  /* Warp effect animation */
+  @keyframes warp-effect {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+
+  .warp-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, rgba(153, 204, 255, 0.8) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 100;
+    pointer-events: none;
+    animation: warp-effect 0.8s ease-out forwards;
+  }
+
+  /* Scrollbar styling */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--lcars-accent2);
+    opacity: 0.3;
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: var(--lcars-accent1);
+  }
+
+  /* LCARS specific styles */
+  .lcars-elbow {
+    position: relative;
+    background-color: var(--lcars-elbow);
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+  }
+
+  .lcars-elbow::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--lcars-bg);
+    border-bottom-left-radius: 2rem;
+  }
+}
